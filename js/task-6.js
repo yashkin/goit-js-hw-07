@@ -1,19 +1,14 @@
-const input = document.querySelector("#validation-input");
+const validationBtnEl = document.querySelector('#validation-input');
 
-const inputBorder = function(event) {
+validationBtnEl.addEventListener('blur', onBlurCheck);
+const validBtnClassList = validationBtnEl.classList;
 
-    input.classList.add('invalid');
-
-    switch (event.currentTarget.value.length) {
-        case Number(event.target.dataset.length):
-            input.classList.replace("invalid", "valid");
-            break;
-        case 0:
-            input.classList.remove("invalid");
-            break;
-
-    }
-
-
+function onBlurCheck(event) {
+  if (validationBtnEl.value.length === Number(validationBtnEl.dataset.length)) {
+    validBtnClassList.add('valid');
+    validBtnClassList.remove('invalid');
+  } else {
+    validBtnClassList.remove('valid');
+    validBtnClassList.add('invalid');
+  }
 }
-input.addEventListener('input', inputBorder);
